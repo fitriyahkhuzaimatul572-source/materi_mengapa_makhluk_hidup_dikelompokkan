@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Ajar Interaktif IPA VII - Makhluk Hidup & Benda Mati | MTsN 1 Kota Malang</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        toska: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#042f2e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #e6fffa 0%, #f0fdfa 40%, #e6f4f1 100%);
+            min-height: 100vh;
+            color: #0d2826;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            box-shadow: 0 10px 30px -5px rgba(13, 148, 136, 0.08);
+        }
+
+        .custom-card {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .custom-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px -6px rgba(13, 148, 136, 0.15);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #e6fffa; }
+        ::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0f766e; }
+
+        .tab-btn-active {
+            background-color: #0d9488 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+
+        .lab-drop-target {
+            border: 2px dashed #14b8a6;
+            background-color: rgba(204, 251, 241, 0.3);
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #ffffff !important; }
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 md:p-6 text-slate-800">
+
+    <div id="app" class="max-w-6xl mx-auto space-y-6">
+
+        <!-- HEADER BAR -->
+        <header class="glass-panel rounded-3xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4 border-b-4 border-toska-600">
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-toska-700 to-toska-500 text-white flex items-center justify-center text-2xl shadow-md shadow-toska-600/30">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <div>
+                    <span class="bg-toska-100 text-toska-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-md uppercase tracking-wider">
+                        MTsN 1 KOTA MALANG
+                    </span>
+                    <h1 class="font-extrabold text-base sm:text-xl text-toska-950 leading-tight">
+                        Materi Ajar Interaktif IPA Kelas VII
+                    </h1>
+                    <p class="text-xs text-toska-700 font-medium flex items-center gap-1.5 mt-0.5">
+                        <i class="fa-solid fa-user-tie"></i> Disusun oleh: <strong>Khuzaimatul Fitriyah, S.Si., M.Si.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Navigation Controls -->
+            <div class="flex items-center gap-2 flex-wrap">
+                <div class="bg-toska-50 border border-toska-200 rounded-2xl p-1 flex gap-1 text-xs font-bold shadow-sm">
+                    <button id="nav-btn-pendahuluan" onclick="switchMainSection('pendahuluan')" class="px-3 py-2 rounded-xl transition tab-btn-active">
+                        <i class="fa-solid fa-compass mr-1"></i> Pendahuluan
+                    </button>
+                    <button id="nav-btn-materi" onclick="switchMainSection('materi')" class="px-3 py-2 rounded-xl transition text-toska-800 hover:bg-toska-100">
+                        <i class="fa-solid fa-book-open mr-1"></i> Materi & Ciri
+                    </button>
+                    <button id="nav-btn-contoh" onclick="switchMainSection('contoh')" class="px-3 py-2 rounded-xl transition text-toska-800 hover:bg-toska-100">
+                        <i class="fa-solid fa-shapes mr-1"></i> Contoh & Studi
+                    </button>
+                    <button id="nav-btn-lab" onclick="switchMainSection('lab')" class="px-3 py-2 rounded-xl transition text-toska-800 hover:bg-toska-100">
+                        <i class="fa-solid fa-flask-vial mr-1"></i> Lab Virtual
+                    </button>
+                    <button id="nav-btn-kuis" onclick="switchMainSection('kuis')" class="px-3 py-2 rounded-xl transition text-toska-800 hover:bg-toska-100">
+                        <i class="fa-solid fa-pen-to-square mr-1"></i> Kuis (10 Soal)
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- SECTION 1: PENDAHULUAN -->
+        <section id="sec-pendahuluan" class="space-y-6">
+            <!-- Hero Banner -->
+            <div class="glass-panel rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-toska-800 via-toska-700 to-teal-800 text-white shadow-xl relative overflow-hidden">
+                <div class="max-w-2xl space-y-4 relative z-10">
+                    <span class="inline-block bg-toska-400/30 backdrop-blur-md text-toska-100 border border-toska-300/30 text-xs font-bold px-3 py-1 rounded-full">
+                        Modul Pembelajaran IPA Kurikulum Merdeka
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold leading-tight">
+                        Mengungkap Rahasia:<br>
+                        <span class="text-toska-200">Makhluk Hidup vs Benda Mati</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-toska-100 leading-relaxed font-normal">
+                        Pernahkah kalian berpikir mengapa sebuah <strong>robot canggih</strong> bisa berjalan dan berbicara namun <strong class="text-amber-300">TIDAK dikategorikan sebagai makhluk hidup</strong>, sedangkan <strong>pohon kelapa</strong> yang diam di tempat justru merupakan <strong class="text-amber-300">makhluk hidup</strong>?
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="switchMainSection('materi')" class="px-5 py-3 bg-amber-400 hover:bg-amber-300 text-toska-950 font-extrabold rounded-2xl text-xs transition shadow-lg flex items-center gap-2">
+                            Mulai Belajar Sekarang <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button onclick="switchMainSection('lab')" class="px-5 py-3 bg-toska-600/80 hover:bg-toska-600 text-white font-bold rounded-2xl text-xs transition border border-toska-400/40 flex items-center gap-2">
+                            <i class="fa-solid fa-flask"></i> Buka Lab Virtual
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Decorative Illustration Badge -->
+                <div class="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 items-center justify-center w-64 h-64 bg-toska-500/20 rounded-full border border-toska-400/30 backdrop-blur-sm p-4">
+                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                        <circle cx="100" cy="100" r="80" fill="none" stroke="#5eead4" stroke-width="2" stroke-dasharray="6,6" />
+                        <path d="M100 40 Q130 80 100 120 Q70 80 100 40 Z" fill="#2dd4bf" opacity="0.8" />
+                        <path d="M100 120 Q120 140 100 160 Q80 140 100 120 Z" fill="#f59e0b" opacity="0.9" />
+                        <circle cx="100" cy="80" r="10" fill="#ffffff" />
+                        <circle cx="100" cy="140" r="6" fill="#ffffff" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Objectives & Teacher Intro Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Capaian & Tujuan Pembelajaran -->
+                <div class="md:col-span-2 glass-panel rounded-3xl p-6 space-y-4">
+                    <h3 class="text-base font-extrabold text-toska-950 flex items-center gap-2 border-b border-toska-200 pb-3">
+                        <i class="fa-solid fa-bullseye text-toska-600"></i> Capaian & Tujuan Pembelajaran (TP)
+                    </h3>
+                    <ul class="space-y-3 text-xs text-slate-700">
+                        <li class="flex items-start gap-3 p-3 bg-toska-50/60 rounded-2xl border border-toska-100">
+                            <span class="w-6 h-6 rounded-full bg-toska-600 text-white flex items-center justify-center font-bold text-xs shrink-0">1</span>
+                            <div>
+                                <strong class="text-toska-950 block mb-0.5">Membedakan Gejala Biotik & Abiotik:</strong>
+                                Peserta didik dapat mengidentifikasi perbedaan mendasar antara objek hidup (biotik) dan objek tak hidup (abiotik) di lingkungan sekitar secara teliti.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-toska-50/60 rounded-2xl border border-toska-100">
+                            <span class="w-6 h-6 rounded-full bg-toska-600 text-white flex items-center justify-center font-bold text-xs shrink-0">2</span>
+                            <div>
+                                <strong class="text-toska-950 block mb-0.5">Menganalisis Ciri-Ciri Makhluk Hidup:</strong>
+                                Peserta didik mampu menguraikan 8 karakteristik utama makhluk hidup (bernapas, nutrisi, tumbuh, reproduksi, iritabilitas, bergerak, ekskresi, adaptasi) disertai bukti ilmiah.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-toska-50/60 rounded-2xl border border-toska-100">
+                            <span class="w-6 h-6 rounded-full bg-toska-600 text-white flex items-center justify-center font-bold text-xs shrink-0">3</span>
+                            <div>
+                                <strong class="text-toska-950 block mb-0.5">Eksperimen Virtual & Evaluasi HOTS:</strong>
+                                Peserta didik dapat membuktikan gejala kehidupan melalui percobaan laboratorium virtual dan memecahkan soal berbasis bernalar kritis (HOTS).
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Teacher Card Profile -->
+                <div class="glass-panel rounded-3xl p-6 space-y-4 flex flex-col justify-between border-t-4 border-toska-600 bg-gradient-to-b from-white to-toska-50/50">
+                    <div class="space-y-3 text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-toska-700 text-white mx-auto flex items-center justify-center text-3xl shadow-lg shadow-toska-700/20">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-sm text-toska-950">Khuzaimatul Fitriyah, S.Si., M.Si.</h4>
+                            <p class="text-[11px] text-toska-700 font-bold">Guru IPA MTsN 1 Kota Malang</p>
+                        </div>
+                        <p class="text-[11px] text-slate-600 italic leading-relaxed bg-white p-3 rounded-2xl border border-toska-100 shadow-sm">
+                            "Selamat belajar anak-anak cerdas VII MTsN 1 Kota Malang! Mari kita eksplorasi keajaiban sains sains di sekitar kita secara interaktif, menyenangkan, dan bermakna."
+                        </p>
+                    </div>
+
+                    <div class="pt-2 text-center border-t border-toska-200">
+                        <span class="text-[10px] text-slate-500 font-semibold">Tahun Ajaran 2026/2027 — IPA Terpadu</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MATERI & CIRI-CIRI MAKHLUK HIDUP -->
+        <section id="sec-materi" class="hidden space-y-6">
+            <!-- Concept Intro Header -->
+            <div class="glass-panel rounded-3xl p-6 space-y-4 border-l-4 border-toska-600">
+                <span class="bg-toska-100 text-toska-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Konsep Dasar IPA</span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-toska-950">Pengertian Makhluk Hidup vs Benda Mati</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed text-slate-700">
+                    <div class="p-4 bg-white rounded-2xl border border-toska-200 space-y-2 shadow-sm">
+                        <h4 class="font-bold text-toska-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-leaf text-toska-600"></i> Makhluk Hidup (Biotik)
+                        </h4>
+                        <p>
+                            Organisme kompleks yang memiliki struktur selular, menjalankan proses metabolisme tubuh, merespon lingkungan, dan secara alami memenuhi <strong>seluruh ciri-ciri kehidupan</strong> secara simultan. Contoh: Manusia, Hewan, Tumbuhan, Jamur, dan Mikroorganisme.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-white rounded-2xl border border-slate-200 space-y-2 shadow-sm">
+                        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-cube text-slate-500"></i> Benda Mati (Abiotik / Tak Hidup)
+                        </h4>
+                        <p>
+                            Materi yang tidak memiliki sel, tidak melakukan aktivitas metabolisme, serta tidak berkembang biak. Benda mati dapat terbentuk secara alami (batu, air, tanah) atau buatan manusia (mobil, komputer, robot).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8 CHARACTERISTICS INTERACTIVE CARDS -->
+            <div class="space-y-4">
+                <div class="flex flex-wrap justify-between items-center gap-2">
+                    <h3 class="text-lg font-extrabold text-toska-950 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-toska-600"></i> 8 Ciri Utama Makhluk Hidup
+                    </h3>
+                    <p class="text-xs text-toska-700 font-medium">Klik setiap kartu untuk melihat penjelasan rinci & contoh nyata!</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="characteristics-grid">
+                    <!-- Cards render via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Detailed Explanation Modal / Dynamic Drawer -->
+            <div id="ciri-detail-box" class="glass-panel rounded-3xl p-6 bg-white space-y-4 border-2 border-toska-400">
+                <div class="flex justify-between items-center border-b border-toska-100 pb-3">
+                    <div class="flex items-center gap-3">
+                        <span id="detail-icon" class="w-10 h-10 rounded-xl bg-toska-600 text-white flex items-center justify-center text-lg shadow"></span>
+                        <h4 id="detail-title" class="text-base font-extrabold text-toska-950"></h4>
+                    </div>
+                    <span class="text-xs bg-toska-100 text-toska-800 font-bold px-3 py-1 rounded-lg">Detail Materi</span>
+                </div>
+                <div id="detail-content" class="text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: CONTOH & STUDI KASUS INTERAKTIF -->
+        <section id="sec-contoh" class="hidden space-y-6">
+            <!-- Header -->
+            <div class="glass-panel rounded-3xl p-6 space-y-2 border-l-4 border-toska-600">
+                <span class="bg-toska-100 text-toska-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Analisis Kasus & Komparasi</span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-toska-950">Membedakan Kasus Khas & Jebakan Konseptual</h2>
+                <p class="text-xs text-slate-600">Banyak benda mati yang memiliki ciri seolah-olah "hidup". Mari kita bedah perbandingannya secara mendalam!</p>
+            </div>
+
+            <!-- Deep-Dive Comparison Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Case 1: Mobil/Robot vs Kuda -->
+                <div class="glass-panel rounded-3xl p-5 space-y-4 custom-card bg-white">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h3 class="font-extrabold text-sm text-toska-950">Kasus 1: Robot / Mobil vs Kuda</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Mobil dan robot dapat <strong>bergerak</strong>, butuh <strong>"bahan bakar" (makanan)</strong>, dan mengeluarkan <strong>gas buang (ekskresi)</strong>.
+                    </p>
+                    <div class="p-3 bg-red-50 rounded-2xl border border-red-100 text-[11px] text-red-900 space-y-1">
+                        <strong>Mengapa Tetap Benda Mati?</strong>
+                        <p>Mobil/robot tidak memiliki sel, tidak tumbuh dari kecil menjadi besar secara biologis, dan tidak bisa berkembang biak menghasilkan keturunan.</p>
+                    </div>
+                </div>
+
+                <!-- Case 2: Tanaman Putri Malu vs Batu -->
+                <div class="glass-panel rounded-3xl p-5 space-y-4 custom-card bg-white">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-plant-wilt"></i>
+                    </div>
+                    <h3 class="font-extrabold text-sm text-toska-950">Kasus 2: Tanaman Putri Malu</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Tumbuhan tidak berpindah tempat seperti hewan. Namun, saat disentuh, daun putri malu langsung mengatup rapat.
+                    </p>
+                    <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-100 text-[11px] text-emerald-900 space-y-1">
+                        <strong>Bukti Gejala Kehidupan:</strong>
+                        <p>Ini memverifikasi ciri <strong>Iritabilitas (peka terhadap rangsang)</strong> dan gerakan tigmonasti pada tumbuhan.</p>
+                    </div>
+                </div>
+
+                <!-- Case 3: Kayu Meja vs Kayu di Pohon -->
+                <div class="glass-panel rounded-3xl p-5 space-y-4 custom-card bg-white">
+                    <div class="w-12 h-12 rounded-2xl bg-toska-100 text-toska-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <h3 class="font-extrabold text-sm text-toska-950">Kasus 3: Benda "Pernah Hidup"</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Meja kayu, kertas, atau daun kering dahulu merupakan bagian dari tumbuhan hidup.
+                    </p>
+                    <div class="p-3 bg-toska-50 rounded-2xl border border-toska-200 text-[11px] text-toska-900 space-y-1">
+                        <strong>Kategori Abiotik Organik:</strong>
+                        <p>Setelah ditebang atau gugur, sel-selnya mati dan seluruh aktivitas kehidupannya berhenti total, sehingga berubah menjadi benda tak hidup.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Sorting Game / Classifier -->
+            <div class="glass-panel rounded-3xl p-6 space-y-4 bg-white border border-toska-200">
+                <div class="flex justify-between items-center flex-wrap gap-2">
+                    <div>
+                        <h3 class="text-base font-extrabold text-toska-950 flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad text-toska-600"></i> Latihan Klasifikasi Cepat
+                        </h3>
+                        <p class="text-xs text-slate-500">Klik kategori yang tepat untuk setiap objek di bawah ini!</p>
+                    </div>
+                    <button onclick="resetClassifierGame()" class="text-xs px-3 py-1.5 bg-toska-100 hover:bg-toska-200 text-toska-800 font-bold rounded-xl transition">
+                        <i class="fa-solid fa-rotate-right"></i> Reset Permainan
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3" id="classifier-items-container">
+                    <!-- Populated by Javascript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: LABORATORIUM VIRTUAL IPA -->
+        <section id="sec-lab" class="hidden space-y-6">
+            <!-- Lab Title Header -->
+            <div class="glass-panel rounded-3xl p-6 bg-gradient-to-r from-toska-900 to-teal-800 text-white space-y-2 shadow-lg">
+                <div class="flex items-center gap-2">
+                    <span class="bg-amber-400 text-toska-950 text-xs font-black px-3 py-0.5 rounded-md">VIRTUAL LAB IPA</span>
+                    <span class="text-xs text-toska-200 font-medium">Laboratorium Pembuktian Ciri Kehidupan</span>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold">Simulasi & Eksperimen Interaktif</h2>
+                <p class="text-xs text-toska-100 max-w-2xl leading-relaxed">
+                    Uji dan buktikan secara sains keberadaan ciri-ciri makhluk hidup melalui 3 praktikum virtual interaktif di bawah ini.
+                </p>
+            </div>
+
+            <!-- Lab Selection Tabs -->
+            <div class="flex bg-white p-1.5 rounded-2xl border border-toska-200 text-xs font-bold gap-2 shadow-sm">
+                <button id="lab-tab-1" onclick="switchLabExperiment(1)" class="flex-1 py-3 rounded-xl bg-toska-600 text-white shadow-md transition">
+                    <i class="fa-solid fa-lungs mr-1.5"></i> Exp 1: Uji Respirasi (CO₂)
+                </button>
+                <button id="lab-tab-2" onclick="switchLabExperiment(2)" class="flex-1 py-3 rounded-xl text-toska-800 hover:bg-toska-50 transition">
+                    <i class="fa-solid fa-hand-pointer mr-1.5"></i> Exp 2: Uji Iritabilitas (Sentuhan)
+                </button>
+                <button id="lab-tab-3" onclick="switchLabExperiment(3)" class="flex-1 py-3 rounded-xl text-toska-800 hover:bg-toska-50 transition">
+                    <i class="fa-solid fa-seedling mr-1.5"></i> Exp 3: Uji Tumbuh-Kembang
+                </button>
+            </div>
+
+            <!-- LAB EXP 1: RESPIRASI (CO2) -->
+            <div id="lab-exp-1" class="glass-panel rounded-3xl p-6 bg-white space-y-6 border border-toska-200">
+                <div class="border-b border-toska-100 pb-3">
+                    <h3 class="font-extrabold text-base text-toska-950">Eksperimen 1: Pembuktian Pelepasan Karbondioksida (CO₂) Saat Bernapas</h3>
+                    <p class="text-xs text-slate-600">Bandingkan reaksi air kapur saat ditiup oleh manusia (Makhluk Hidup) vs dipompa udara biasa dari balon (Benda Mati).</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <!-- Experiment Bench Graphics -->
+                    <div class="bg-toska-50/80 rounded-2xl p-6 border border-toska-200 text-center space-y-4 relative">
+                        <span class="text-xs font-bold text-toska-800 bg-white px-3 py-1 rounded-full shadow-sm border border-toska-100 inline-block">
+                            Tabung Reaksi Air Kapur Jernih
+                        </span>
+
+                        <div class="h-48 flex justify-center items-end gap-10 pt-4">
+                            <!-- Glass Tube 1 -->
+                            <div class="w-20 flex flex-col items-center gap-2">
+                                <div id="tube-1-liquid" class="w-16 h-28 bg-teal-100/60 rounded-b-2xl border-2 border-slate-400 relative transition-all duration-700 flex items-center justify-center">
+                                    <span id="tube-1-status" class="text-[10px] font-bold text-slate-600">Jernih</span>
+                                </div>
+                                <span class="text-[11px] font-bold text-slate-700">Sampel A (Ditiup)</span>
+                            </div>
+
+                            <!-- Glass Tube 2 -->
+                            <div class="w-20 flex flex-col items-center gap-2">
+                                <div id="tube-2-liquid" class="w-16 h-28 bg-teal-100/60 rounded-b-2xl border-2 border-slate-400 relative transition-all duration-700 flex items-center justify-center">
+                                    <span id="tube-2-status" class="text-[10px] font-bold text-slate-600">Jernih</span>
+                                </div>
+                                <span class="text-[11px] font-bold text-slate-700">Sampel B (Pompa)</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center gap-3">
+                            <button onclick="runRespirationExp('blow')" class="px-4 py-2.5 bg-toska-600 hover:bg-toska-700 text-white font-bold rounded-xl text-xs transition shadow flex items-center gap-1.5">
+                                <i class="fa-solid fa-wind"></i> Tiup Sampel A (Manusia)
+                            </button>
+                            <button onclick="runRespirationExp('pump')" class="px-4 py-2.5 bg-slate-600 hover:bg-slate-700 text-white font-bold rounded-xl text-xs transition shadow flex items-center gap-1.5">
+                                <i class="fa-solid fa-pump-soap"></i> Pompa Sampel B (Pompa)
+                            </button>
+                            <button onclick="resetRespirationExp()" class="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Observation Log -->
+                    <div class="space-y-3 text-xs">
+                        <h4 class="font-bold text-toska-950 uppercase tracking-wider">Hasil Pengamatan Laboratorium:</h4>
+                        <div id="lab-1-log" class="p-4 bg-toska-50 rounded-2xl border border-toska-200 space-y-2 text-slate-700 min-h-[140px]">
+                            <p class="italic text-slate-500">Klik tombol di samping untuk memulai eksperimen peniupan air kapur...</p>
+                        </div>
+                        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-amber-900 text-[11px] font-medium">
+                            <strong>Kesimpulan Sains:</strong> Air kapur bereaksi dengan CO₂ membentuk kalsium karbonat (CaCO₃) yang menyebabkan air kapur menjadi keruh membuktikan manusia mengekskresikan gas CO₂ saat bernapas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAB EXP 2: IRITABILITAS (PUTRI MALU) -->
+            <div id="lab-exp-2" class="hidden glass-panel rounded-3xl p-6 bg-white space-y-6 border border-toska-200">
+                <div class="border-b border-toska-100 pb-3">
+                    <h3 class="font-extrabold text-base text-toska-950">Eksperimen 2: Kepekaan Tumbuhan Putri Malu Terhadap Rangsang Sentuhan</h3>
+                    <p class="text-xs text-slate-600">Lakukan simulasi sentuhan pada daun tanaman Mimosa pudica dan amati respon biologisnya.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="bg-toska-50/80 rounded-2xl p-6 border border-toska-200 text-center space-y-4">
+                        <div class="h-44 flex items-center justify-center relative">
+                            <!-- SVG Plant Illustration -->
+                            <svg id="mimosa-svg" viewBox="0 0 200 150" class="w-56 h-40 transition-all duration-500">
+                                <!-- Pot & Stem -->
+                                <path d="M70 140 L130 140 L120 100 L80 100 Z" fill="#b45309" />
+                                <path d="M100 100 L100 40" stroke="#15803d" stroke-width="6" stroke-linecap="round" />
+                                
+                                <!-- Leaves (Open by default) -->
+                                <g id="mimosa-leaves-left" class="transition-all duration-500 origin-right">
+                                    <ellipse cx="60" cy="50" rx="30" ry="8" fill="#22c55e" transform="rotate(-20 60 50)" />
+                                    <ellipse cx="65" cy="75" rx="25" ry="7" fill="#16a34a" transform="rotate(-10 65 75)" />
+                                </g>
+                                <g id="mimosa-leaves-right" class="transition-all duration-500 origin-left">
+                                    <ellipse cx="140" cy="50" rx="30" ry="8" fill="#22c55e" transform="rotate(20 140 50)" />
+                                    <ellipse cx="135" cy="75" rx="25" ry="7" fill="#16a34a" transform="rotate(10 135 75)" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="flex justify-center gap-3">
+                            <button onclick="touchMimosaPlant('light')" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition shadow flex items-center gap-1.5">
+                                <i class="fa-solid fa-hand-pointer"></i> Sentuh Halus
+                            </button>
+                            <button onclick="touchMimosaPlant('heavy')" class="px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs transition shadow flex items-center gap-1.5">
+                                <i class="fa-solid fa-hand-fist"></i> Sentuh Kasar
+                            </button>
+                            <button onclick="resetMimosaPlant()" class="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+                                Pulihkan
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <h4 class="font-bold text-toska-950 uppercase tracking-wider">Status Respon Tumbuhan:</h4>
+                        <div id="lab-2-log" class="p-4 bg-toska-50 rounded-2xl border border-toska-200 space-y-2 text-slate-700 min-h-[140px]">
+                            <p class="font-semibold text-emerald-800">Kondisi Awal: Daun mekar sempurna menangkap sinar matahari.</p>
+                        </div>
+                        <div class="p-3 bg-toska-100/70 rounded-xl border border-toska-200 text-toska-900 text-[11px] font-medium">
+                            <strong>Konsep Biologi:</strong> Penutupan daun akibat perubahan tekanan turgor pada persendian daun (pulvinus) disebut gerak <strong>Tigmonasti / Seismonasti</strong>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAB EXP 3: TUMBUH KEMBANG -->
+            <div id="lab-exp-3" class="hidden glass-panel rounded-3xl p-6 bg-white space-y-6 border border-toska-200">
+                <div class="border-b border-toska-100 pb-3">
+                    <h3 class="font-extrabold text-base text-toska-950">Eksperimen 3: Simulasi Pertumbuhan Biji Kacang Hijau vs Batu Kristal</h3>
+                    <p class="text-xs text-slate-600">Amati perkembangan bertahap selama 7 hari simulasi antara organisme hidup vs materi tak hidup.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 bg-toska-50 p-4 rounded-2xl border border-toska-200">
+                        <label class="text-xs font-bold text-toska-950 whitespace-nowrap">Hari Ke- <span id="growth-day-num" class="text-toska-700 text-sm">0</span>:</label>
+                        <input type="range" id="growth-slider" min="0" max="7" value="0" oninput="updateGrowthSimulation(this.value)" class="w-full accent-toska-600 cursor-pointer">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Living Plant Growth Card -->
+                        <div class="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200 text-center space-y-3">
+                            <span class="text-xs font-extrabold text-emerald-900 uppercase">Organisme Hidup (Biji Kacang Hijau)</span>
+                            <div class="h-36 bg-white rounded-xl border border-emerald-100 flex items-end justify-center p-2 relative">
+                                <div id="plant-growth-graphic" class="w-12 bg-emerald-500 rounded-t-lg transition-all duration-300" style="height: 10px;"></div>
+                            </div>
+                            <p id="plant-growth-desc" class="text-xs font-semibold text-emerald-800">Hari 0: Biji dormancy belum berkecambah.</p>
+                        </div>
+
+                        <!-- Non-Living Stone Card -->
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-center space-y-3">
+                            <span class="text-xs font-extrabold text-slate-800 uppercase">Benda Mati (Batu Kerikil)</span>
+                            <div class="h-36 bg-white rounded-xl border border-slate-200 flex items-center justify-center p-2">
+                                <div class="w-16 h-12 bg-slate-400 rounded-2xl border-2 border-slate-500 flex items-center justify-center text-white font-bold text-xs shadow-inner">
+                                    Batu
+                                </div>
+                            </div>
+                            <p id="stone-growth-desc" class="text-xs font-semibold text-slate-600">Hari 0: Ukuran & bentuk tetap tidak berubah.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: KUIS INTERAKTIF HOTS & LOTS (10 SOAL) -->
+        <section id="sec-kuis" class="hidden space-y-6">
+            <!-- Quiz Header -->
+            <div class="glass-panel rounded-3xl p-6 bg-gradient-to-r from-toska-800 to-teal-900 text-white space-y-2 shadow-lg">
+                <div class="flex justify-between items-center flex-wrap gap-2">
+                    <div>
+                        <span class="bg-amber-400 text-toska-950 text-xs font-black px-3 py-0.5 rounded-md uppercase">Evaluasi Pemahaman</span>
+                        <h2 class="text-xl sm:text-2xl font-extrabold mt-1">Kuis Interaktif IPA (10 Soal HOTS & LOTS)</h2>
+                    </div>
+                    <div class="bg-toska-950/60 backdrop-blur-md px-4 py-2 rounded-2xl border border-toska-400/30 text-right">
+                        <div class="text-[10px] text-toska-300 uppercase font-bold">Target KKM IPA</div>
+                        <div class="text-lg font-black text-amber-300">75 / 100</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Container Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Question View Card (3 Cols) -->
+                <div class="lg:col-span-3 glass-panel rounded-3xl p-6 space-y-6 bg-white border border-toska-200">
+                    <div id="quiz-question-box" class="space-y-5">
+                        <!-- Question content dynamically rendered -->
+                    </div>
+
+                    <!-- Feedback Box -->
+                    <div id="quiz-feedback-box" class="hidden p-4 rounded-2xl text-xs space-y-1.5 border"></div>
+
+                    <!-- Navigation Controls -->
+                    <div class="flex justify-between items-center pt-4 border-t border-toska-100">
+                        <button id="btn-quiz-prev" onclick="navigateQuizQuestion(-1)" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button id="btn-quiz-next" onclick="navigateQuizQuestion(1)" class="px-5 py-2.5 bg-toska-600 hover:bg-toska-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 shadow">
+                            Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Palette & Status (1 Col) -->
+                <div class="lg:col-span-1 glass-panel rounded-3xl p-5 space-y-4 bg-white border border-toska-200">
+                    <h3 class="font-bold text-xs text-toska-950 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-grid-2 text-toska-600"></i> Navigasi Soal
+                    </h3>
+
+                    <div class="grid grid-cols-5 gap-2 text-xs font-bold" id="quiz-palette">
+                        <!-- 10 Question buttons rendered via JS -->
+                    </div>
+
+                    <div class="pt-3 border-t border-toska-100 text-[11px] space-y-1.5 text-slate-600">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3.5 h-3.5 rounded bg-toska-600"></div>
+                            <span>Sudah Dijawab</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3.5 h-3.5 rounded bg-white border border-slate-300"></div>
+                            <span>Belum Dijawab</span>
+                        </div>
+                    </div>
+
+                    <button onclick="calculateFinalQuizScore()" class="w-full py-3 bg-amber-400 hover:bg-amber-300 text-toska-950 font-extrabold text-xs rounded-xl transition shadow flex items-center justify-center gap-2 mt-4">
+                        <i class="fa-solid fa-calculator"></i> Selesaikan Kuis
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Result Modal Summary -->
+            <div id="quiz-result-card" class="hidden glass-panel rounded-3xl p-6 sm:p-8 space-y-6 bg-white border-2 border-toska-400">
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 bg-toska-600 text-white rounded-2xl mx-auto flex items-center justify-center text-3xl shadow-lg shadow-toska-600/30">
+                        <i class="fa-solid fa-trophy text-amber-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-toska-950">Laporan Hasil Kuis Interaktif</h3>
+                    <p class="text-xs text-toska-700 font-semibold">Materi: Makhluk Hidup & Benda Mati — Class VII MTsN 1 Kota Malang</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-toska-800 to-teal-900 text-white p-6 rounded-3xl text-center space-y-1 shadow-lg">
+                    <div class="text-xs text-toska-200 uppercase font-bold tracking-widest">Nilai Akhir Kuis Anda</div>
+                    <div id="quiz-final-score" class="text-5xl font-black text-amber-300">0</div>
+                    <p id="quiz-score-status" class="text-xs text-toska-100 font-medium pt-1"></p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
+                    <div class="p-3 bg-toska-50 rounded-2xl border border-toska-200">
+                        <span class="text-slate-500 block">Total Soal</span>
+                        <strong class="text-toska-950 text-sm font-bold">10 Soal</strong>
+                    </div>
+                    <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200">
+                        <span class="text-slate-500 block">Jawaban Benar</span>
+                        <strong id="res-correct-count" class="text-emerald-700 text-sm font-bold">0</strong>
+                    </div>
+                    <div class="p-3 bg-red-50 rounded-2xl border border-red-200">
+                        <span class="text-slate-500 block">Jawaban Salah</span>
+                        <strong id="res-wrong-count" class="text-red-700 text-sm font-bold">0</strong>
+                    </div>
+                    <div class="p-3 bg-amber-50 rounded-2xl border border-amber-200">
+                        <span class="text-slate-500 block">KKM IPA</span>
+                        <strong class="text-amber-800 text-sm font-bold">75</strong>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-3">
+                    <button onclick="resetQuiz()" class="px-5 py-3 bg-toska-600 hover:bg-toska-700 text-white text-xs font-bold rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate"></i> Coba Kuis Lagi
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // 8 CHARACTERISTICS DATABASE
+        const CHARACTERISTICS_DATA = [
+            {
+                id: 1,
+                title: "1. Bernapas (Respirasi)",
+                icon: "fa-lungs",
+                summary: "Proses mengambil Oksigen (O₂) dan mengeluarkan Karbondioksida (CO₂)",
+                detail: `
+                    <p><strong>Penjelasan Rinci:</strong> Bernapas adalah proses biologis mengambil oksigen dari udara untuk memecah zat makanan (glukosa) guna menghasilkan energi tubuh (ATP), serta membuang gas karbondioksida dan uap air.</p>
+                    <ul class="list-disc list-inside space-y-1 font-medium text-toska-900">
+                        <li>Manusia & Mamalia: Bernapas dengan Paru-paru</li>
+                        <li>Ikan: Bernapas dengan Insang</li>
+                        <li>Tumbuhan: Bernapas melalui Stomata (mulut daun) dan Lentisel (pori batang)</li>
+                    </ul>
+                `
+            },
+            {
+                id: 2,
+                title: "2. Membutuhkan Nutrisi (Makan & Minum)",
+                icon: "fa-utensils",
+                summary: "Memperoleh energi dan materi pembangun sel tubuh",
+                detail: `
+                    <p><strong>Penjelasan Rinci:</strong> Setiap makhluk hidup membutuhkan asupan nutrisi untuk bertahan hidup, bergerak, dan memperbaiki sel-sel tubuh yang rusak.</p>
+                    <ul class="list-disc list-inside space-y-1 font-medium text-toska-900">
+                        <li><strong>Autotrof:</strong> Tumbuhan hijau memproduksi makanan sendiri melalui proses <em>Fotosintesis</em>.</li>
+                        <li><strong>Heterotrof:</strong> Hewan dan manusia memperoleh nutrisi dengan mengonsumsi makhluk hidup lain.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 3,
+                title: "3. Tumbuh dan Berkembang",
+                icon: "fa-arrow-up-right-dots",
+                summary: "Pertambahan ukuran irreversibel & pematangan fungsi organ",
+                detail: `
+                    <p><strong>Penjelasan Rinci:</strong></p>
+                    <p>• <strong>Pertumbuhan (Kuantitatif):</strong> Pertambahan volume, tinggi, dan massa tubuh yang bersifat tidak dapat kembali ke ukuran semula (irreversibel).</p>
+                    <p>• <strong>Perkembangan (Kualitatif):</strong> Proses pematangan organ tubuh menuju kedewasaan (misalnya munculnya bunga pada tumbuhan atau pubertas pada manusia).</p>
+                `
+            },
+            {
+                id: 4,
+                title: "4. Berkembang Biak (Reproduksi)",
+                icon: "fa-dna",
+                summary: "Menghasilkan keturunan untuk melestarikan jenisnya",
+                detail: `
+                    <p><strong>Penjelasan Rinci:</strong> Tujuannya adalah mencegah kepunahan spesies.</p>
+                    <ul class="list-disc list-inside space-y-1 font-medium text-toska-900">
+                        <li><strong>Generatif (Seksual):</strong> Melibatkan peleburan sel kelamin jantan & betina (contoh: biji tumbuhan, melahirkan/bertelur pada hewan).</li>
+                        <li><strong>Vegetatif (Aseksual):</strong> Tanpa perkawinan (contoh: tunas pisang, membelah diri pada Amoeba).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 5,
+                title: "5. Peka Terhadap Rangsang (Iritabilitas)",
+                icon: "fa-bolt",
+                summary: "Kemampuan merespon perubahan lingkungan sekitar",
+                detail: `
+                    <p><strong>Penjelasan Rinci:</strong> Reaksi terhadap stimulasi seperti cahaya, sentuhan, suhu, kimia, dan gravitasi.</p>
+                    <p><strong>Contoh Nyata:</strong></p>
+                    <ul class="list-disc list-inside space-y-1 font-medium text-toska-900">
+                        <li>Pupil mata manusia mengecil saat terkena cahaya terang.</li>
+                        <li>Daun putri malu mengatup saat disentuh.</li>
+                        <li>Ujung batang tumbuhan tumbuh membengkok ke arah datangnya cahaya matahari (Fototropisme).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 6,
+                title: "6. Bergerak",
+                icon: "fa-person-walking",
+                summary: "Perubahan posisi seluruh tubuh atau bagian tubuh tertentu",
+                detail: `
+                    <p><strong>Penjelasan Rinci:</strong></p>
+                    <p>• <strong>Gerak Aktif:</strong> Berpindah tempat secara nyata (dilakukan oleh hewan dan manusia dengan alat gerak seperti kaki, sayap, atau sirip).</p>
+                    <p>• <strong>Gerak Pasif:</strong> Gerakan terbatas tanpa berpindah tempat (dilakukan oleh tumbuhan, seperti mekar bunga atau gerak sulur melilit).</p>
+                `
+            },
+            {
+                id: 7,
+                title: "7. Mengeluarkan Zat Sisa (Ekskresi)",
+                icon: "fa-droplet",
+                summary: "Membuang racun hasil sisa metabolisme tubuh",
+                detail: `
+                    <p><strong>Penjelasan Rinci:</strong> Apabila zat sisa metabolisme tidak dikeluarkan, dapat meracuni dan membahayakan tubuh.</p>
+                    <ul class="list-disc list-inside space-y-1 font-medium text-toska-900">
+                        <li>Manusia: Keringat (kulit), Urine (ginjal), CO₂ (paru-paru).</li>
+                        <li>Tumbuhan: Penguapan air melalui Stomata (Transpirasi).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 8,
+                title: "8. Beradaptasi",
+                icon: "fa-shield-halved",
+                summary: "Penyesuaian diri terhadap kondisi lingkungan tempat hidup",
+                detail: `
+                    <p><strong>Penjelasan Rinci:</strong> Kemampuan bertahan hidup di habitatnya.</p>
+                    <ul class="list-disc list-inside space-y-1 font-medium text-toska-900">
+                        <li><strong>Morfologi:</strong> Bentuk paruh burung sesuai jenis makanannya; daun kaktus berubah menjadi duri.</li>
+                        <li><strong>Fisiologi:</strong> Jumlah sel darah merah orang gunung lebih banyak.</li>
+                        <li><strong>Tingkah Laku:</strong> Bunglon mengubah warna kulit (Mimikri); paus muncul ke permukaan mengambil udara.</li>
+                    </ul>
+                `
+            }
+        ];
+
+        // CLASSIFIER GAME ITEMS
+        const CLASSIFIER_ITEMS = [
+            { name: "Pohon Burung Gereja", type: "biotik" },
+            { name: "Batu Kerikil River", type: "abiotik" },
+            { name: "Mobil Listrik", type: "abiotik" },
+            { name: "Jamur Tiram", type: "biotik" },
+            { name: "Meja Kayu Jati", type: "abiotik" },
+            { name: "Bakteri E. coli", type: "biotik" }
+        ];
+
+        // 10 QUIZ QUESTIONS DATABASE (HOTS & LOTS)
+        const QUIZ_QUESTIONS = [
+            {
+                id: 1,
+                level: "LOTS",
+                question: "Di antara pilihan berikut, manakah kelompok yang SELURUHNYA tergolong ke dalam gejala alam biotik (makhluk hidup)?",
+                options: [
+                    "Batu, Air, Pohon Mangga, Tanah",
+                    "Ayam, Jamur, Pohon Kelapa, Bakteri",
+                    "Mobil, Kucing, Robot, Udara",
+                    "Meja Kayu, Daun Kering, Kupu-kupu, Air"
+                ],
+                answer: 1,
+                explanation: "Ayam, Jamur, Pohon Kelapa, dan Bakteri seluruhnya merupakan organisme hidup (biotik) yang memiliki sel dan menjalankan fungsi kehidupan."
+            },
+            {
+                id: 2,
+                level: "HOTS",
+                question: "Sebuah mobil balap mampu bergerak sangat cepat, membutuhkan bahan bakar sebagai sumber energi, serta mengeluarkan gas emisi pembuangan dari knalpotnya. Namun mobil TETAP dikategorikan sebagai benda mati karena...",
+                options: [
+                    "Mobil tidak menggunakan gas oksigen secara langsung",
+                    "Mobil tidak tersusun atas sel, tidak tumbuh secara biologis, dan tidak bereproduksi",
+                    "Mobil hanya bisa bergerak di jalan raya yang rata",
+                    "Bahan bakar mobil harganya mahal"
+                ],
+                answer: 1,
+                explanation: "Syarat mutlak makhluk hidup adalah memenuhi SELURUH 8 ciri secara bersamaan, termasuk memiliki struktur sel, metabolisme alami, pertumbuhan biologis, dan reproduksi."
+            },
+            {
+                id: 3,
+                level: "LOTS",
+                question: "Tumbuhan hijau memiliki keistimewaan mampu membuat makanan sendiri dari zat anorganik dengan bantuan sinar matahari. Tumbuhan tersebut bersifat...",
+                options: [
+                    "Heterotrof",
+                    "Autotrof",
+                    "Saprofit",
+                    "Parasit"
+                ],
+                answer: 1,
+                explanation: "Organisme yang sanggup memproduksi makanan sendiri melalui proses fotosintesis dinamakan organisme Autotrof."
+            },
+            {
+                id: 4,
+                level: "HOTS",
+                question: "Saat praktikum di laboratorium IPA, Ahmad meneteskan larutan air kapur jernih ke dalam dua tabung. Tabung A ditiup napas manusia, sedangkan Tabung B dipompa udara biasa. Hasilnya Tabung A menjadi KERUH. Hal ini membuktikan ciri makhluk hidup yaitu...",
+                options: [
+                    "Ekskresi zat sisa metabolisme berupa Karbondioksida (CO₂) saat bernapas",
+                    "Membutuhkan nutrisi berupa cairan kapur",
+                    "Iritabilitas terhadap tiupan angin",
+                    "Pertumbuhan volume air kapur"
+                ],
+                answer: 0,
+                explanation: "Gas Karbondioksida (CO₂) dari paru-paru bereaksi dengan Ca(OH)₂ membentuk endapan CaCO₃ yang memperkeruh air kapur, membuktikan proses ekskresi pernapasan."
+            },
+            {
+                id: 5,
+                level: "LOTS",
+                question: "Peristiwa daun tanaman putri malu mengatup secara cepat sesaat setelah disentuh jari tangan dinamakan...",
+                options: [
+                    "Fotosintesis",
+                    "Iritabilitas (Peka terhadap rangsang)",
+                    "Adaptasi morfologi",
+                    "Ekskresi"
+                ],
+                answer: 1,
+                explanation: "Respon cepat terhadap rangsangan fisik/sentuhan merupakan bukti ciri Iritabilitas pada tumbuhan."
+            },
+            {
+                id: 6,
+                level: "HOTS",
+                question: "Seorang petani menemukan bahwa tanaman jagung di kebunnya tumbuh membengkok mengarah ke sisi timur di mana sinar matahari pagi bersinar terang. Mekanisme sains yang menjelaskan hal ini adalah...",
+                options: [
+                    "Gerak Fototropisme positif akibat respon hormon pertumbuhan terhadap cahaya",
+                    "Tumbuhan sengaja mencari udara dingin",
+                    "Akar tanaman menolak nutrisi tanah",
+                    "Daun jagung terlalu berat di sisi timur"
+                ],
+                answer: 0,
+                explanation: "Gerak pembengkokan tumbuhan mendekati sumber cahaya dinamakan Fototropisme Positif, dipengaruhi oleh distribusi hormon auksin."
+            },
+            {
+                id: 7,
+                level: "LOTS",
+                question: "Manakah di antara pernyataan berikut yang menjelaskan perbedaan mendasar antara PERTUMBUHAN dan PERKEMBANGAN?",
+                options: [
+                    "Pertumbuhan bersifat kualitatif, sedangkan perkembangan bersifat kuantitatif",
+                    "Pertumbuhan bertambah ukuran & irreversibel; perkembangan adalah pematangan fungsi organ menuju kedewasaan",
+                    "Pertumbuhan hanya terjadi pada hewan, sedangkan perkembangan hanya pada tumbuhan",
+                    "Pertumbuhan dapat kembali ke bentuk semula, perkembangan tidak"
+                ],
+                answer: 1,
+                explanation: "Pertumbuhan diukur secara kuantitatif (ukuran/tinggi) dan bersifat irreversibel, sedangkan perkembangan adalah pematangan kualitatif fungsi organ biologis."
+            },
+            {
+                id: 8,
+                level: "HOTS",
+                question: "Pohon jati menggugurkan daunnya pada musim kemarau yang kering. Tujuan utama dari perilaku adaptasi ini adalah...",
+                options: [
+                    "Mematikan hama ulat daun",
+                    "Mengurangi laju penguapan air (transpirasi) agar tidak kekurangan air",
+                    "Mempercepat proses pembentukan bunga",
+                    "Merangsang pertambahan tinggi batang"
+                ],
+                answer: 1,
+                explanation: "Menggugurkan daun (meranggas) adalah bentuk adaptasi tingkah laku tumbuhan untuk menekan laju transpirasi air saat musim kering."
+            },
+            {
+                id: 9,
+                level: "LOTS",
+                question: "Alat pernapasan khas pada tumbuhan yang berada di permukaan bawah daun dinamakan...",
+                options: [
+                    "Lentisel",
+                    "Stomata (Mulut Daun)",
+                    "Pembuluh Xilem",
+                    "Kloroplas"
+                ],
+                answer: 1,
+                explanation: "Stomata atau mulut daun merupakan pori-pori mikroskopis di permukaan daun yang berfungsi untuk pertukaran gas O₂ dan CO₂."
+            },
+            {
+                id: 10,
+                level: "HOTS",
+                question: "Sebuah kristal garam dapur (NaCl) yang direndam dalam larutan jenuh dapat 'membesar' ukurannya seiring waktu. Mengapa pembesaran kristal ini TIDAK bisa disebut sebagai pertumbuhan makhluk hidup?",
+                options: [
+                    "Karena kristal membesar akibat penumpukan materi luar (akresi), bukan karena pembelahan & pembentukan sel secara internal",
+                    "Karena warna kristal garam putih bening",
+                    "Karena kristal garam rasanya asin",
+                    "Karena pembesaran kristal terjadi sangat cepat dalam hitungan detik"
+                ],
+                answer: 0,
+                explanation: "Penambahan ukuran benda mati seperti kristal terjadi akibat penempelan partikel dari luar (akresi), sedangkan pertumbuhan makhluk hidup terjadi secara biologis dari dalam melalui pembelahan dan perbanyakan sel."
+            }
+        ];
+
+        // STATE VARIABLES
+        let currentQuizIndex = 0;
+        let quizAnswers = {}; // { qId: optionIndex }
+
+        window.onload = function() {
+            renderCharacteristicsGrid();
+            selectCharacteristicDetail(1);
+            renderClassifierGame();
+            renderQuizCard(0);
+            renderQuizPalette();
+        };
+
+        // NAVIGATION SWITCHER
+        function switchMainSection(secId) {
+            ['pendahuluan', 'materi', 'contoh', 'lab', 'kuis'].forEach(id => {
+                document.getElementById(`sec-${id}`).classList.add('hidden');
+                document.getElementById(`nav-btn-${id}`).className = "px-3 py-2 rounded-xl transition text-toska-800 hover:bg-toska-100 font-bold";
+            });
+
+            document.getElementById(`sec-${secId}`).classList.remove('hidden');
+            document.getElementById(`nav-btn-${secId}`).className = "px-3 py-2 rounded-xl transition tab-btn-active font-bold";
+        }
+
+        // SECTION 2: CHARACTERISTICS RENDER
+        function renderCharacteristicsGrid() {
+            const container = document.getElementById('characteristics-grid');
+            container.innerHTML = '';
+
+            CHARACTERISTICS_DATA.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "glass-panel p-4 rounded-2xl border border-toska-200 custom-card cursor-pointer bg-white space-y-2 flex flex-col justify-between";
+                card.onclick = () => selectCharacteristicDetail(item.id);
+
+                card.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-toska-100 text-toska-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid ${item.icon}"></i>
+                        </div>
+                        <h4 class="font-extrabold text-xs text-toska-950">${item.title}</h4>
+                        <p class="text-[11px] text-slate-600 leading-snug">${item.summary}</p>
+                    </div>
+                    <div class="pt-2 text-[10px] text-toska-600 font-bold flex items-center gap-1">
+                        <span>Lihat Rincian</span> <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectCharacteristicDetail(id) {
+            const data = CHARACTERISTICS_DATA.find(c => c.id === id);
+            if (!data) return;
+
+            document.getElementById('detail-icon').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
+            document.getElementById('detail-title').textContent = data.title;
+            document.getElementById('detail-content').innerHTML = data.detail;
+
+            // Scroll gently to detail box
+            document.getElementById('ciri-detail-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // SECTION 3: CLASSIFIER GAME
+        function renderClassifierGame() {
+            const container = document.getElementById('classifier-items-container');
+            container.innerHTML = '';
+
+            CLASSIFIER_ITEMS.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = "p-3 bg-toska-50/70 rounded-2xl border border-toska-200 flex flex-col justify-between space-y-2";
+                
+                card.innerHTML = `
+                    <span class="font-bold text-xs text-toska-950">${item.name}</span>
+                    <div class="flex gap-2 text-[11px]" id="classifier-item-${idx}">
+                        <button onclick="checkClassifierChoice(${idx}, 'biotik')" class="flex-1 py-1.5 bg-white border border-toska-300 hover:bg-toska-600 hover:text-white rounded-lg font-bold transition text-toska-900">
+                            Biotik
+                        </button>
+                        <button onclick="checkClassifierChoice(${idx}, 'abiotik')" class="flex-1 py-1.5 bg-white border border-slate-300 hover:bg-slate-700 hover:text-white rounded-lg font-bold transition text-slate-800">
+                            Abiotik
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function checkClassifierChoice(idx, chosenType) {
+            const item = CLASSIFIER_ITEMS[idx];
+            const btnGroup = document.getElementById(`classifier-item-${idx}`);
+
+            if (chosenType === item.type) {
+                btnGroup.innerHTML = `
+                    <div class="w-full py-1.5 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-lg font-bold text-center text-xs flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-circle-check"></i> Tepat! (${item.type.toUpperCase()})
+                    </div>
+                `;
+            } else {
+                btnGroup.innerHTML = `
+                    <div class="w-full py-1.5 bg-red-100 border border-red-300 text-red-800 rounded-lg font-bold text-center text-xs flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-circle-xmark"></i> Kurang Tepat! Harusnya ${item.type.toUpperCase()}
+                    </div>
+                `;
+            }
+        }
+
+        function resetClassifierGame() {
+            renderClassifierGame();
+        }
+
+        // SECTION 4: LAB EXPERIMENTS
+        function switchLabExperiment(expNum) {
+            [1, 2, 3].forEach(n => {
+                document.getElementById(`lab-exp-${n}`).classList.add('hidden');
+                document.getElementById(`lab-tab-${n}`).className = "flex-1 py-3 rounded-xl text-toska-800 hover:bg-toska-50 font-bold transition";
+            });
+
+            document.getElementById(`lab-exp-${expNum}`).classList.remove('hidden');
+            document.getElementById(`lab-tab-${expNum}`).className = "flex-1 py-3 rounded-xl bg-toska-600 text-white font-bold shadow-md transition";
+        }
+
+        function runRespirationExp(mode) {
+            const logBox = document.getElementById('lab-1-log');
+
+            if (mode === 'blow') {
+                document.getElementById('tube-1-liquid').className = "w-16 h-28 bg-amber-100/90 rounded-b-2xl border-2 border-amber-500 relative transition-all duration-700 flex items-center justify-center shadow-md";
+                document.getElementById('tube-1-status').textContent = "Keruh Putih";
+                document.getElementById('tube-1-status').className = "text-[10px] font-extrabold text-amber-900";
+
+                logBox.innerHTML = `
+                    <p class="font-bold text-toska-900"><i class="fa-solid fa-circle-check text-emerald-600"></i> Sampel A (Tiupan Manusia):</p>
+                    <p>Udara tiupan manusia bereaksi secara langsung memperkeruh air kapur jernih! Ini menandakan tingginya konsentrasi gas Karbondioksida (CO₂) hasil pernapasan seluler manusia.</p>
+                `;
+            } else {
+                document.getElementById('tube-2-liquid').className = "w-16 h-28 bg-teal-100/60 rounded-b-2xl border-2 border-slate-400 relative transition-all duration-700 flex items-center justify-center";
+                document.getElementById('tube-2-status').textContent = "Tetap Jernih";
+                document.getElementById('tube-2-status').className = "text-[10px] font-bold text-slate-600";
+
+                logBox.innerHTML = `
+                    <p class="font-bold text-slate-800"><i class="fa-solid fa-circle-info text-slate-500"></i> Sampel B (Pompa Benda Mati):</p>
+                    <p>Udara atmosfer biasa dari pompa tidak mengubah kejernihan air kapur secara signifikan karena kadar CO₂ di udara bebas relatif sangat kecil dibandingkan gas ekspirasi pernapasan.</p>
+                `;
+            }
+        }
+
+        function resetRespirationExp() {
+            document.getElementById('tube-1-liquid').className = "w-16 h-28 bg-teal-100/60 rounded-b-2xl border-2 border-slate-400 relative transition-all duration-700 flex items-center justify-center";
+            document.getElementById('tube-2-liquid').className = "w-16 h-28 bg-teal-100/60 rounded-b-2xl border-2 border-slate-400 relative transition-all duration-700 flex items-center justify-center";
+            document.getElementById('tube-1-status').textContent = "Jernih";
+            document.getElementById('tube-2-status').textContent = "Jernih";
+            document.getElementById('lab-1-log').innerHTML = `<p class="italic text-slate-500">Klik tombol di samping untuk memulai eksperimen peniupan air kapur...</p>`;
+        }
+
+        function touchMimosaPlant(intensity) {
+            const leftLeaves = document.getElementById('mimosa-leaves-left');
+            const rightLeaves = document.getElementById('mimosa-leaves-right');
+            const logBox = document.getElementById('lab-2-log');
+
+            if (intensity === 'light') {
+                leftLeaves.style.transform = "scaleY(0.3) rotate(-35deg)";
+                rightLeaves.style.transform = "scaleY(0.3) rotate(35deg)";
+                logBox.innerHTML = `
+                    <p class="font-bold text-amber-800"><i class="fa-solid fa-bolt"></i> Respon Sentuhan Halus:</p>
+                    <p>Hanya helai anak daun di titik sentuh yang mengatup secara perlahan. Kecepatan respon bergantung pada kekuatan rangsangan.</p>
+                `;
+            } else {
+                leftLeaves.style.transform = "scaleY(0.1) scaleX(0.5) rotate(-50deg)";
+                rightLeaves.style.transform = "scaleY(0.1) scaleX(0.5) rotate(50deg)";
+                logBox.innerHTML = `
+                    <p class="font-bold text-red-800"><i class="fa-solid fa-bolt-lightning"></i> Respon Sentuhan Kasar:</p>
+                    <p>Gelombang rangsangan merambat cepat ke seluruh tangkai daun! Seluruh anak daun mengatup rapat dan tangkai menunduk dalam kurun 1-2 detik.</p>
+                `;
+            }
+        }
+
+        function resetMimosaPlant() {
+            const leftLeaves = document.getElementById('mimosa-leaves-left');
+            const rightLeaves = document.getElementById('mimosa-leaves-right');
+            leftLeaves.style.transform = "scaleY(1) rotate(0deg)";
+            rightLeaves.style.transform = "scaleY(1) rotate(0deg)";
+            document.getElementById('lab-2-log').innerHTML = `<p class="font-semibold text-emerald-800">Kondisi Awal: Daun mekar sempurna menangkap sinar matahari.</p>`;
+        }
+
+        function updateGrowthSimulation(day) {
+            document.getElementById('growth-day-num').textContent = day;
+            const plantBar = document.getElementById('plant-growth-graphic');
+            const plantDesc = document.getElementById('plant-growth-desc');
+            const stoneDesc = document.getElementById('stone-growth-desc');
+
+            const heightPx = 10 + (day * 16);
+            plantBar.style.height = `${heightPx}px`;
+
+            if (day == 0) {
+                plantDesc.textContent = "Hari 0: Biji dormancy belum berkecambah.";
+            } else if (day <= 2) {
+                plantDesc.textContent = `Hari ${day}: Akar radikula mulai menembus kulit biji & tumbuh ke bawah.`;
+            } else if (day <= 5) {
+                plantDesc.textContent = `Hari ${day}: Batang kecambah (hipokotil) memanjang tegak dan kotiledon terangkat.`;
+            } else {
+                plantDesc.textContent = `Hari ${day}: Daun sejati pertama mekar berwarna hijau segar, siap berfotosintesis!`;
+            }
+
+            stoneDesc.textContent = `Hari ${day}: Ukuran, massa, dan struktur batu kerikil tetap konstan tanpa perubahan.`;
+        }
+
+        // SECTION 5: QUIZ MECHANICS
+        function renderQuizPalette() {
+            const container = document.getElementById('quiz-palette');
+            container.innerHTML = '';
+
+            QUIZ_QUESTIONS.forEach((q, idx) => {
+                const isAnswered = quizAnswers[q.id] !== undefined;
+                const isActive = idx === currentQuizIndex;
+
+                let bgClass = "bg-white text-slate-700 border-slate-300";
+                if (isAnswered) bgClass = "bg-toska-600 text-white border-toska-600";
+                if (isActive) bgClass = "bg-amber-400 text-toska-950 border-amber-500 font-black shadow";
+
+                const btn = document.createElement('button');
+                btn.className = `p-2 rounded-lg border text-center transition ${bgClass}`;
+                btn.textContent = idx + 1;
+                btn.onclick = () => jumpToQuizQuestion(idx);
+                container.appendChild(btn);
+            });
+        }
+
+        function renderQuizCard(index) {
+            const q = QUIZ_QUESTIONS[index];
+            const container = document.getElementById('quiz-question-box');
+
+            let html = `
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="bg-toska-100 text-toska-900 font-extrabold px-3 py-1 rounded-full uppercase">
+                            Soal ${index + 1} dari 10 (${q.level})
+                        </span>
+                        <span class="text-slate-400 font-bold">ID Soal: #${q.id}</span>
+                    </div>
+
+                    <p class="text-sm sm:text-base font-bold text-toska-950 leading-relaxed">${q.question}</p>
+                </div>
+
+                <div class="space-y-2.5 pt-2">
+            `;
+
+            q.options.forEach((opt, optIdx) => {
+                const letters = ['A', 'B', 'C', 'D'];
+                const isSelected = quizAnswers[q.id] === optIdx;
+
+                html += `
+                    <label class="flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition ${isSelected ? 'bg-toska-50 border-toska-600 shadow-sm' : 'bg-white border-slate-200 hover:border-toska-300'}">
+                        <input type="radio" name="quiz_${q.id}" value="${optIdx}" ${isSelected ? 'checked' : ''} onchange="selectQuizAnswer(${q.id}, ${optIdx})" class="mt-1 accent-toska-600 w-4 h-4">
+                        <div class="text-xs sm:text-sm text-slate-800">
+                            <strong class="text-toska-900 mr-1.5">${letters[optIdx]}.</strong> ${opt}
+                        </div>
+                    </label>
+                `;
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+
+            // Update Feedback View if already answered
+            const feedbackBox = document.getElementById('quiz-feedback-box');
+            if (quizAnswers[q.id] !== undefined) {
+                const userChoice = quizAnswers[q.id];
+                const isCorrect = userChoice === q.answer;
+
+                feedbackBox.classList.remove('hidden');
+                if (isCorrect) {
+                    feedbackBox.className = "p-4 rounded-2xl text-xs space-y-1 bg-emerald-50 border border-emerald-200 text-emerald-900";
+                    feedbackBox.innerHTML = `
+                        <strong class="font-bold flex items-center gap-1.5 text-emerald-800"><i class="fa-solid fa-circle-check"></i> Jawaban Anda Tepat!</strong>
+                        <p class="leading-relaxed">${q.explanation}</p>
+                    `;
+                } else {
+                    feedbackBox.className = "p-4 rounded-2xl text-xs space-y-1 bg-red-50 border border-red-200 text-red-900";
+                    feedbackBox.innerHTML = `
+                        <strong class="font-bold flex items-center gap-1.5 text-red-800"><i class="fa-solid fa-circle-xmark"></i> Kurang Tepat!</strong>
+                        <p class="leading-relaxed">${q.explanation}</p>
+                    `;
+                }
+            } else {
+                feedbackBox.classList.add('hidden');
+            }
+
+            // Button visibility
+            document.getElementById('btn-quiz-prev').style.visibility = index === 0 ? 'hidden' : 'visible';
+            document.getElementById('btn-quiz-next').textContent = index === QUIZ_QUESTIONS.length - 1 ? 'Selesai' : 'Berikutnya';
+        }
+
+        function selectQuizAnswer(qId, optionIdx) {
+            quizAnswers[qId] = optionIdx;
+            renderQuizPalette();
+            renderQuizCard(currentQuizIndex);
+        }
+
+        function navigateQuizQuestion(direction) {
+            const nextIdx = currentQuizIndex + direction;
+            if (nextIdx >= 0 && nextIdx < QUIZ_QUESTIONS.length) {
+                currentQuizIndex = nextIdx;
+                renderQuizCard(currentQuizIndex);
+                renderQuizPalette();
+            } else if (nextIdx >= QUIZ_QUESTIONS.length) {
+                calculateFinalQuizScore();
+            }
+        }
+
+        function jumpToQuizQuestion(idx) {
+            currentQuizIndex = idx;
+            renderQuizCard(currentQuizIndex);
+            renderQuizPalette();
+        }
+
+        function calculateFinalQuizScore() {
+            let correctCount = 0;
+            QUIZ_QUESTIONS.forEach(q => {
+                if (quizAnswers[q.id] === q.answer) {
+                    correctCount++;
+                }
+            });
+
+            const finalScore = Math.round((correctCount / QUIZ_QUESTIONS.length) * 100);
+            const wrongCount = QUIZ_QUESTIONS.length - correctCount;
+
+            document.getElementById('quiz-final-score').textContent = finalScore;
+            document.getElementById('res-correct-count').textContent = correctCount;
+            document.getElementById('res-wrong-count').textContent = wrongCount;
+
+            const statusText = document.getElementById('quiz-score-status');
+            if (finalScore >= 75) {
+                statusText.textContent = "LULUS TUNTAS! Selamat, pemahaman konsep IPA Anda sangat luar biasa!";
+                statusText.className = "text-xs text-amber-300 font-bold pt-1";
+            } else {
+                statusText.textContent = "BELUM TUNTAS. Pelajari kembali materi dan coba jalankan eksperimen di Lab Virtual!";
+                statusText.className = "text-xs text-red-200 font-bold pt-1";
+            }
+
+            document.getElementById('quiz-result-card').classList.remove('hidden');
+            document.getElementById('quiz-result-card').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            quizAnswers = {};
+            currentQuizIndex = 0;
+            document.getElementById('quiz-result-card').classList.add('hidden');
+            renderQuizPalette();
+            renderQuizCard(0);
+        }
+    </script>
+</body>
+</html>
